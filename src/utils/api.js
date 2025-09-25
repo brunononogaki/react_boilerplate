@@ -138,45 +138,6 @@ export const getTotalCount = async (baseEndpoint, headers, queryParams = {}) => 
   }
 };
 
-/**
- * Get total count of devices
- * @param {string} token - Authorization token
- * @param {boolean} monitoringFilter - Optional filter for monitoring status
- * @returns {Promise<number>} - Total count of devices
- */
-export const getDevicesCount = async (token, monitoringFilter = null) => {
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  };
-
-  const endpoint = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}/api/v1/devices`;
-
-  // Build query parameters
-  const queryParams = {};
-  if (monitoringFilter !== null) {
-    queryParams.monitoring = monitoringFilter;
-  }
-
-  return await getTotalCount(endpoint, headers, queryParams);
-};
-
-/**
- * Get total count of circuits
- * @param {string} token - Authorization token
- * @returns {Promise<number>} - Total count of circuits
- */
-export const getCircuitsCount = async (token) => {
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  };
-
-  const endpoint = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}/api/v1/circuits`;
-
-  return await getTotalCount(endpoint, headers, {});
-};
-
 
 /**
  * Fetch all users from the API
@@ -195,34 +156,3 @@ export const fetchAllUsers = async (token) => {
 };
 
 
-/**
- * Fetch all clients from the API
- * @param {string} token - Authorization token
- * @returns {Promise<Array>} - Array with all clients
- */
-export const fetchAllClients = async (token) => {
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  };
-
-  const endpoint = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}/api/v1/clients`;
-
-  return await fetchAllPaginated(endpoint, headers);
-};
-
-/**
- * Fetch all services from the API
- * @param {string} token - Authorization token
- * @returns {Promise<Array>} - Array with all services
- */
-export const fetchAllServices = async (token) => {
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  };
-
-  const endpoint = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}/api/v1/services`;
-
-  return await fetchAllPaginated(endpoint, headers);
-};
